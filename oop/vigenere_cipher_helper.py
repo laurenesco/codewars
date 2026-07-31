@@ -2,9 +2,8 @@
 
 class VigenereCipher(object):
     def __init__(self, key: str, alphabet: str) -> None:
-        self.alphabet = set(alphabet)   
+        self.alphabet = alphabet
         self.key = key
-        self.createDisplacementDict(key)
     
     def encode(self, text: str) -> str:
         """Takes a plaintext string and returns encoded version"""
@@ -17,14 +16,14 @@ class VigenereCipher(object):
                     
             # Only convert letters in alphabet, per spec
             if c in self.alphabet:
-                shift = self.displacements[self.key[key_ptr]]
+                shift = self.alphabet.index(self.key[key_ptr])
                 
                 # Wrap the shift, if necessary
-                if ord(c) + shift > ord('a') + 25:
-                    shift -= 26
+                if self.alphabet.index(c) + shift > len(self.alphabet) - 1:
+                    shift -= len(self.alphabet)
                                     
-                # c = ASCII value of c + how far key_ptr char is from a
-                result += chr(ord(c) + shift)
+                # Shift c by key characters
+                result += self.alphabet[self.alphabet.index(c) + shift]
 
             else:
                 result += c
@@ -43,20 +42,20 @@ class VigenereCipher(object):
         
         key_ptr = 0
         result = ""
-            
+                    
         # Iterate over the string characters and create result
         for c in text:
                     
             # Only convert letters in alphabet, per spec
             if c in self.alphabet:
-                shift = self.displacements[self.key[key_ptr]]
+                shift = self.alphabet.index(self.key[key_ptr])
                 
                 # Wrap the shift, if necessary
-                if ord(c) - shift < ord('a'):
-                    shift -= 26
+                if self.alphabet.index(c) - shift < 0:
+                    shift -= len(self.alphabet)
                                                         
-                # c = ASCII value of c + how far key_ptr char is from a
-                result += chr(ord(c) - shift)
+                # Undo the shift on c when decoding
+                result += self.alphabet[self.alphabet.index(c) - shift]
                 
             else:
                 result += c
@@ -68,12 +67,3 @@ class VigenereCipher(object):
                 key_ptr += 1
             
         return result
-    
-    def createDisplacementDict(self, key: str) -> None:
-        """Create dict to store shift values for O(1) lookup later"""
-        self.displacements = {}
-        
-        for c in self.key:
-            
-            shift = (ord(c.lower()) - ord('a'))
-            self.displacements[c] = shift
