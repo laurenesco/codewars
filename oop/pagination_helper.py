@@ -56,3 +56,5 @@ class PaginationHelper:
             return -1
                             
         return item_index // self.items_per_page
+                            
+        return item_index // self.items_per_page
