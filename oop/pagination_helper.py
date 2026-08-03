@@ -16,22 +16,10 @@ class PaginationHelper:
         """
         Creates a paginated version of the provided collection as a nested list.
         """
-        page = 0
-        items_on_page = 0
-        
-        for item in collection:
-            if items_on_page == self.items_per_page:
-                page += 1
-                
-                self.paginated.append([item])
-                
-                items_on_page = 0
-            elif not self.paginated:
-                self.paginated.append([item])
-            else:
-                self.paginated[page].append(item)
-                
-            items_on_page += 1
+        self.paginated = [
+            collection[i:i + self.items_per_page]
+            for i in range(0, len(collection), self.items_per_page)
+        ]
                     
     def item_count(self) -> int:
         """
