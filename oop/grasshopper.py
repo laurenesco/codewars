@@ -7,3 +7,9 @@ class Hero:
         self.health = 100
         self.damage = 5
         self.experience = 0
+
+    def check_alive(health: int) -> bool:
+        if health > 0:
+            return True
+        else:
+            return False
