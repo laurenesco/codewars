@@ -5,7 +5,7 @@ import numpy as np
 
 def find_average(nums: list[int]) -> int:
     # Method 1
-#     return np.mean(nums)
+    # return np.mean(nums)
 
     # Method 2
     # return np.sum(nums) / len(nums)
