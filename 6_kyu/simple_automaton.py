@@ -3,6 +3,7 @@
 class Automaton(object):
     
     # Captures automaton states as keys, accept state status as values
+    START_STATE = "q1"
     ACCEPT_STATE = "q2"
     STATE_TRANSITIONS = {
         "q1": {
@@ -26,11 +27,11 @@ class Automaton(object):
         """
         Accept or reject the commands based on whether we end in our accept state, q2
         """
-        current_state = "q1"
+        state = self.START_STATE
         
         for symbol in commands:
-            current_state = self.STATE_TRANSITIONS[current_state][symbol]
+            state = self.STATE_TRANSITIONS[current_state][symbol]
         
-        return current_state == self.ACCEPT_STATE
+        return state == self.ACCEPT_STATE
 
 my_automaton = Automaton()
