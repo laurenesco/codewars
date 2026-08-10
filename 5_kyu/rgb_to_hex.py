@@ -8,36 +8,33 @@ hex_chars = {
 }
 
 def get_hex_char(decimal: int) -> str:
-    """
-    Converts a decimal input into a hexadecimal string and returns that string
-    """
-    
     # Round if the value is outside bounds
-    if decimal > 255: 
+    if decimal > 255:
         decimal = 255
     elif decimal <= 0:
         return "00"
-        
+
     converted_chars = []    
     result = ''
-    
+
     while decimal > 0:
         # Divide by 16 and grab remainder
         remainder = decimal % 16
         decimal //= 16
-                        
+
         # Convert remainder to hex
         if remainder > 9:
             hex = hex_chars[remainder]
-        elif len(converted_chars) == 0:
-            hex = f"{remainder:02d}"
-        else: 
-            hex = remainder
-                    
+        else:
+            hex = str(remainder)
+
         # Add hex to result stack (need LIFO)
         converted_chars.append(str(hex))
-                                                                       
-    return ''.join(reversed(converted_chars))
+
+    while converted_chars:
+        result += converted_chars.pop()
+        
+    return result.zfill(2)
             
 
 def rgb(r: int, g: int, b: int) -> str:
