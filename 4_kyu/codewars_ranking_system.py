@@ -47,22 +47,23 @@ class User:
           - rank difference calculations ignore the 0 rank
         """
         
-        if activity_rank not in RANKS:
-            raise ValueError:
-                "Valid ranks are -8 through 8, not including 0."
+        if activity_rank not in self.RANKS:
+            raise ValueError("Valid ranks are -8 through 8, not including 0.")
         
         # Calculate rank difference between user and activity
-        rank_diff = abs(RANKS[self.rank] - RANKS[activity_rank])
+        rank_diff = abs(self.RANKS[self.rank] - self.RANKS[activity_rank])
         progress_gained = 0
         
-        # Calculate proguess gained
-        if RANKS[activity_rank] > RANKS[self.rank]:
-            progress_gained = 10 * rank_difference * rank_difference
-        elif RANKS[activity_rank] == RANKS[self.rank]:
+        print(f"rank diff {rank_diff}")
+        
+        # Calculate progress gained
+        if self.RANKS[activity_rank] > self.RANKS[self.rank]:
+            progress_gained = 10 * rank_diff * rank_diff
+        elif self.RANKS[activity_rank] == self.RANKS[self.rank]:
             progress_gained = 3
-        elif RANKS[activity_rank] > RANKS[self.rank]
+        elif self.RANKS[activity_rank] > self.RANKS[self.rank]:
             progress_gained = 1
-        else
+        else:
             pass
         
         # Rank up
@@ -73,15 +74,20 @@ class User:
                 progress_gained -= (100 - self.progress)
                 self.progress = 0
             else:
-                self.progress = progress_gained
+                self.progress += progress_gained
                 progress_gained = 0
-        
+                        
     def rank_up(self) -> None:
         """
         Increments the rank attribute for a User instances 
         
         Business rules:
-        - Rank can never be less than MIN_RANK 
-        - Rank can never be more than MAX_RANK
-        - Rank can never be 0
+        - Rank !> 8 
+        - Rank !< -8
+        - Rank != 0
         """
+        if self.rank != 8:
+            self.rank += 1
+            
+        if self.rank == 0:
+            self.rank += 1
