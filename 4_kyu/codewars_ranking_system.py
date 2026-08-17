@@ -54,8 +54,6 @@ class User:
         rank_diff = abs(self.RANKS[self.rank] - self.RANKS[activity_rank])
         progress_gained = 0
         
-        print(f"rank diff {rank_diff}")
-        
         # Calculate progress gained
         if self.RANKS[activity_rank] > self.RANKS[self.rank]:
             progress_gained = 10 * rank_diff * rank_diff
@@ -65,6 +63,10 @@ class User:
             progress_gained = 1
         else:
             pass
+              
+        print(f"current progress: {self.progress}, current rank: {self.rank}")
+        print(f"activity rank: {activity_rank}, rank diff {rank_diff}")
+        print(f"progress gained: {progress_gained}")
         
         # Rank up
         while progress_gained > 0:
@@ -76,7 +78,9 @@ class User:
             else:
                 self.progress += progress_gained
                 progress_gained = 0
-                        
+                
+        print(f"new rank {self.rank}, new progress: {self.progress}")
+        
     def rank_up(self) -> None:
         """
         Increments the rank attribute for a User instances 
