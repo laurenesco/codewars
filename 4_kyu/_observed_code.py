@@ -15,18 +15,13 @@ POSSIBLE_NUMS = {
     '0': ['0', '8'],
 }
 def get_pins(observed: str):
-    
-#     for idx in range(len(observed)):
-#         for adjacent in POSSIBLE_NUMS[observed[idx]]:
-#             print(f"idx: {idx}, possible nume: {adjacent} code: {observed[0:idx] + adjacent + observed[idx:len(observed)-1]}")
-#             code = observed[0:idx] + adjacent + observed[idx:len(observed)-1]
-#             possible_codes.append(code)
 
     possible_codes = []
     permute(observed, 0, possible_codes)
-
     
-def permute(observed: str, idx: int, possible_codes: list[str])
+    return possible_codes
+
+def permute(observed: str, idx: int, possible_codes: list[str]) -> list[str]:
 
     # Base case: No more digits to permute
     if idx == len(observed):
@@ -37,4 +32,9 @@ def permute(observed: str, idx: int, possible_codes: list[str])
     
     # Recursive logic
     for adjacent in POSSIBLE_NUMS[observed[idx]]:
+        permuted_code = observed.copy()
+        permuted_code[idx] = adjacent
+        
+        # Recurse for each sub digit
+        permute(permuted, idx+1, possible_codes)
         
