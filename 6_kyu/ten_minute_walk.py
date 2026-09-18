@@ -19,6 +19,6 @@ def is_valid_walk(walk: list[str]) -> bool:
             case 'e':
                 we_position += 1 
             case _:
-                raise Exception("Unknown direction provided")
+                raise ValueError("Unknown direction provided")
     
     return len(walk) == 10 and ns_position == 0 and we_position == 0
