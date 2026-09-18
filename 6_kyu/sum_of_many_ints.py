@@ -1,7 +1,7 @@
 # https://www.codewars.com/kata/54c2fc0552791928c9000517
 
 # import numpy as np
-import math
+# import math
 
 def f(n: int, m: int) -> int:
     final_sum = 0
@@ -42,16 +42,13 @@ def f(n: int, m: int) -> int:
     sums = n // m
     remainder = n % m
             
-    # Calculate sum once
-    for i in range (1, m + 1):
-        final_sum += i % m
+    # Calculate sum once using triangular number formula
+    final_sum += m * (m - 1) // 2
                 
     # Multiply by times we will get this sum
     final_sum *= sums
         
     # Add on leftover using triangular number formula
     final_sum += remainder * (remainder + 1) // 2
-    
-    """ Attempt 6 """
                 
     return final_sum
