@@ -1,6 +1,10 @@
 # https://www.codewars.com/kata/54da539698b8a2ad76000228
 
 def is_valid_walk(walk: list[str]) -> bool:
+    """
+    Returns true if the provided walk is exactly 10 blocks
+    and returns to the point of origin.
+    """
     ns_position = 0
     we_position = 0
 
