@@ -23,6 +23,9 @@ def longest_collatz(arr: list[int]) -> int:
     
     return result
 
+    """ Alternatively, """
+    # return max(arr, key=collatzify)
+
 def collatzify(value: int) -> int:
     """
     Perform Collatz conjecture, and track how many operations it takes. 
